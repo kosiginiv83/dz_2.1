@@ -2,7 +2,7 @@ def import_data():
 	cook_book = dict()
 	with open('cook_book.txt') as tf:
 		for line in tf:
-			dish_name = line.strip() #tf.readline()
+			dish_name = line.strip()
 			ingridients_quantity = int(tf.readline())
 			ingridients_list = list()
 			for i in range(ingridients_quantity):
