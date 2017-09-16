@@ -5,9 +5,9 @@ import yaml
 def import_data():
 	with open('cook_book.yml', encoding='utf8') as f:
 		dishes = yaml.load(f)
-	return dishes.get('dishes')
 	#~ pprint(dishes)
-
+	return dishes.get('dishes')
+	
 
 def get_shop_list_by_dishes(dishes, person_count):
 	cook_book = import_data()
