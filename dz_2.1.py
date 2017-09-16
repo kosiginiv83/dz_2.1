@@ -1,9 +1,11 @@
 import json
+#~ from pprint import pprint
 
 
 def import_data():
 	with open('cook_book.json', encoding='utf8') as f:
 		dishes = json.load(f)
+		#~ pprint(dishes)
 	return dishes.get('dishes')
 
 
