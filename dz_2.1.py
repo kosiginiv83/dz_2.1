@@ -1,11 +1,11 @@
 import json
-#~ from pprint import pprint
+# from pprint import pprint
 
 
 def import_data():
 	with open('cook_book.json', encoding='utf8') as f:
 		dishes = json.load(f)
-		#~ pprint(dishes)
+		# pprint(dishes)
 	return dishes.get('dishes')
 
 
@@ -43,4 +43,6 @@ def create_shop_list():
 
 
 create_shop_list()
-input()
+input()  # Нужна для того, чтобы окно консоли не закрылось сразу 
+# после выполнения программы в случае запуска файла с проводника  
+# или файлового менеджера.
