@@ -26,10 +26,10 @@ def get_shop_list_by_dishes(dishes, person_count):
 			new_shop_list_item['quantity'] *= person_count
 			if new_shop_list_item['ingridient_name'] not in shop_list:
 				shop_list[new_shop_list_item['ingridient_name']
-								] = new_shop_list_item
+					] = new_shop_list_item
 			else:
 				shop_list[new_shop_list_item['ingridient_name']
-								]['quantity'] += new_shop_list_item['quantity']
+					]['quantity'] += new_shop_list_item['quantity']
 	return shop_list
 
 
@@ -41,11 +41,13 @@ def print_shop_list(shop_list):
 
 def create_shop_list():
 	dishes = input("Введите блюда на одного человека через "
-								"запятую (без пробелов): ").lower().split(',')
+				"запятую (без пробелов): ").lower().split(',')
 	person_count = int(input("Введите количество человек: "))
 	shop_list = get_shop_list_by_dishes(dishes, person_count)
 	print_shop_list(shop_list)
 
 
 create_shop_list()
-input()
+input()  # Нужна для того, чтобы окно консоли не закрылось сразу 
+# после выполнения программы в случае запуска файла с проводника  
+# или файлового менеджера.
