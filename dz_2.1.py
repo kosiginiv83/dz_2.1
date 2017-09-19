@@ -1,27 +1,45 @@
+import csv
+# from pprint import pprint
+
+
 def import_data():
-	cook_book = dict()
-	with open('cook_book.txt') as tf:
-		for line in tf:
-			dish_name = line.strip()
-			ingridients_quantity = int(tf.readline())
+	cook_book = list()
+	
+	with open('cook_book.csv', encoding='utf8', newline='') as csvfile:
+		cook_book_reader = csv.DictReader(csvfile, delimiter=';')
+		
+		for row in cook_book_reader:
+			dish_dict = dict()
 			ingridients_list = list()
+			
+			dish_dict['dish'] = row['dish']
+			ingridients_quantity = int(row['ingridients_quantity'])
+			dish_dict['ingridients_quantity'] = ingridients_quantity
+			
 			for i in range(ingridients_quantity):
-				raw_ingr_list = tf.readline().split(' | ')
-				ingr_dict = dict()
-				ingr_dict['ingridient_name'] = raw_ingr_list[0]
-				ingr_dict['quantity'] = int(raw_ingr_list[1])
-				ingr_dict['measure'] = raw_ingr_list[2].strip()
-				ingridients_list.append(ingr_dict)
-			cook_book[dish_name] = ingridients_list
-			tf.readline()
+				ingridient_dict = dict()
+				
+				ingridient_characteristic = row[None][i].split(' | ')
+				ingridient_dict['ingridient_name'] = ingridient_characteristic[0]
+				ingridient_dict['quantity'] = int(ingridient_characteristic[1])
+				ingridient_dict['measure'] = ingridient_characteristic[2]
+				ingridients_list.append(ingridient_dict)
+				
+			dish_dict['ingridients']  = ingridients_list	
+			cook_book.append(dish_dict)
+	
+	# pprint(cook_book)
 	return cook_book
 
 
 def get_shop_list_by_dishes(dishes, person_count):
 	cook_book = import_data()
 	shop_list = {}
+	
 	for dish in dishes:
-		for ingridient in cook_book[dish]:
+		dish_index = list(filter(lambda x: cook_book[x]['dish'] == dish, 
+				range(len(cook_book))))[0]
+		for ingridient in cook_book[dish_index]['ingridients']:
 			new_shop_list_item = dict(ingridient)
 			new_shop_list_item['quantity'] *= person_count
 			if new_shop_list_item['ingridient_name'] not in shop_list:
@@ -48,4 +66,4 @@ def create_shop_list():
 
 
 create_shop_list()
-input()
+input()  # 
